@@ -1,0 +1,191 @@
+#include <iostream>
+#include <string.h>
+
+using namespace std;
+
+
+class Usuario{
+    private:
+    char nome_usuario[50];
+    char CPF_Usuario[11];
+    int n_user=0;
+    int idade_usuario;
+    public:
+
+        void Teste_CPF(char cpf_teste[50],char CPF_Escrito[50]){
+            while(strcmp(CPF_Escrito,cpf_teste)==0){
+                cout<<"\n CPF ja cadastrado!!!"<<endl;
+                cout<<"\n > Digite o CPF: ";
+                fflush(stdin);
+                gets(CPF_Escrito);
+            }
+        }
+        void Cadastra_Usuario(){
+
+            char Nome_Usuario_Dig[50];
+            char CPF_Usuario_Dig[50],cpf_ant[50];
+            int Idade_Usuario_Dig,t_user,r_user=0,n_usuario=1;
+            setlocale(LC_ALL,"portuguese");
+            n_usuario=n_usuario+1;
+            cout<<"\n > Digite o nome de usuario: ";
+            fflush(stdin);
+            gets(Nome_Usuario_Dig);
+            strcpy(nome_usuario,Nome_Usuario_Dig);
+
+            cout<<"\n > Digite a idade do usuario: ";
+            cin>>Idade_Usuario_Dig;
+            idade_usuario=Idade_Usuario_Dig;
+
+            cout<<"\n > Digite o CPF do usuario: ";
+            fflush(stdin);
+            gets(CPF_Usuario_Dig);                  //Pega o CPF do usuario
+            cout<<"CPF_Usuario(PRIVADO): "<<CPF_Usuario;
+            cout<<"CPF_Usuario(PUBLICO): "<<CPF_Usuario_Dig;
+
+            Teste_CPF(CPF_Usuario_Dig,CPF_Usuario);//Testa CPF se é igual a algum já registrado
+
+            t_user=strlen(CPF_Usuario_Dig);
+            for(int i=0;i<t_user;i++){               //Testa o CPF do usuario
+                while((CPF_Usuario_Dig[i]!='0')&&(CPF_Usuario_Dig[i]!='1')&&(CPF_Usuario_Dig[i]!='2')&&(CPF_Usuario_Dig[i]!='3')&&(CPF_Usuario_Dig[i]!='4')&&(CPF_Usuario_Dig[i]!='5')&&(CPF_Usuario_Dig[i]!='6')&&(CPF_Usuario_Dig[i]!='7')&&(CPF_Usuario_Dig[i]!='8')&&(CPF_Usuario_Dig[i]!='9')&&(CPF_Usuario_Dig[i]!='-')&&(CPF_Usuario_Dig[i]!='.')&&(CPF_Usuario_Dig[i]!=' ')){
+                    cout<<"\n CPF Escrito de forma incorreta escreva novamente: ";
+                    fflush(stdin);              //Testa se tem letra no cpf e pede correção
+                    gets(CPF_Usuario_Dig);
+                }
+            }
+            for(int j=0;j<t_user;j++){              //Copia apenas os numeros do cpf digitado para a variavel privada
+                if((CPF_Usuario_Dig[j]!='.')&&(CPF_Usuario_Dig[j]!='-')&&(CPF_Usuario_Dig[j]!=' ')){
+                    CPF_Usuario[r_user]=CPF_Usuario_Dig[j];
+                    r_user=r_user+1;
+                }
+                else{
+                    CPF_Usuario[r_user]=CPF_Usuario_Dig[j+1];
+
+                }
+            }
+            n_user=n_user+n_usuario;
+        }
+        void Imprime_Usuario(){
+
+            setlocale(LC_ALL,"portuguese");
+            cout<<" >> USUARIO: "<<nome_usuario<<endl;
+            cout<<" >> CPF: "<<CPF_Usuario<<endl;
+            cout<<" >> IDADE: "<<idade_usuario<<endl;
+            cout<<" >> NUMERO DE USUARIOS: "<<n_user<<endl;
+        }
+};
+
+class Autor{
+    private:
+    char nome_autor[50];
+    char CPF_autor[11];
+    public:
+        void Cadastra_Autor(){
+            int t_autor=0,r=0;
+            char CPF_Autor_dig[15];
+            char  nome_autor_digitado[50];
+            setlocale(LC_ALL,"portuguese");
+
+            cout<<"\n > Digite o nome do autor do filme: "; //Cadastra o nome do autor
+            fflush(stdin);
+            gets(nome_autor_digitado);
+            strcpy(nome_autor,nome_autor_digitado);
+
+            cout<<"\n > Digite o CPF do autor do filme(Digite os 11 números): ";
+            fflush(stdin);
+            gets(CPF_Autor_dig);                //Pega o CPF do autor
+            t_autor=strlen(CPF_Autor_dig);
+            for(int i=0;i<t_autor;i++){               //Testa o CPF do autor
+                while((CPF_Autor_dig[i]!='0')&&(CPF_Autor_dig[i]!='1')&&(CPF_Autor_dig[i]!='2')&&(CPF_Autor_dig[i]!='3')&&(CPF_Autor_dig[i]!='4')&&(CPF_Autor_dig[i]!='5')&&(CPF_Autor_dig[i]!='6')&&(CPF_Autor_dig[i]!='7')&&(CPF_Autor_dig[i]!='8')&&(CPF_Autor_dig[i]!='9')&&(CPF_Autor_dig[i]!='-')&&(CPF_Autor_dig[i]!='.')&&(CPF_Autor_dig[i]!=' ')){
+                    cout<<"\n CPF Escrito de forma incorreta escreva novamente (lembre-se de digitar os 11 números): ";
+                    fflush(stdin);              //Testa se tem letra no cpf e pede correção
+                    gets(CPF_Autor_dig);
+                }
+            }
+            for(int j=0;j<15;j++){              //Copia apenas os numeros do cpf digitado para a variavel privada
+                if((CPF_Autor_dig[j]!='.')&&(CPF_Autor_dig[j]!='-')&&(CPF_Autor_dig[j]!=' ')){
+                    CPF_autor[r]=CPF_Autor_dig[j];
+                    r=r+1;
+                }
+                else{
+                    CPF_autor[r]=CPF_Autor_dig[j+1];
+                }
+            }
+        }
+        void Imprime_Autor(){
+            int t_autor_final=0;
+            setlocale(LC_ALL,"portuguese");
+            cout<<" >> AUTOR: "<<nome_autor<<endl;
+            cout<<" >> CPF: ";
+            t_autor_final=strlen(CPF_autor);
+            for(int i=0;i<t_autor_final;i++){
+                    cout<<""<<CPF_autor[i];
+
+            }
+            cout<<"\n -------------------------------------"<<endl;
+        }
+};
+
+class Filme : public Autor{
+    private:
+    char nome_filme[100],genero[50];
+    int faixa_etaria;
+    public:
+        void Cadastra_Filme(){
+            char nome_filme_digitado[50];
+            int faixa_etaria_digitada;
+            char genero_digitado[50];
+            setlocale(LC_ALL,"portuguese");
+
+                cout<<"\n > Digite o nome do filme que deseja cadastrar: ";
+                    fflush(stdin);
+                    gets(nome_filme_digitado);
+                    strcpy(nome_filme,nome_filme_digitado);
+
+                cout<<"\n > Digite o genero do filme: ";
+                    fflush(stdin);
+                    gets(genero_digitado);
+                    strcpy(genero,genero_digitado);
+
+                cout<<"\n > Digite a faixa etaria do filme(livre = 0 / 10 / 12 / 14 / 16 / 18): ";
+                fflush(stdin);
+                cin >> faixa_etaria_digitada;
+                while((faixa_etaria_digitada!=0)&&(faixa_etaria_digitada!=10)&&(faixa_etaria_digitada!=12)&&(faixa_etaria_digitada!=14)&&(faixa_etaria_digitada!=16)&&(faixa_etaria_digitada!=18)){
+                    cout<<"\n > Classificação indicativa inválida tente novamente: ";
+                    fflush(stdin);
+                    cin>>faixa_etaria_digitada;
+                }
+                faixa_etaria=faixa_etaria_digitada;
+        }
+        void Imprime_Filme(){
+            setlocale(LC_ALL,"portuguese");
+            cout<<" >> FILME: "<<nome_filme<<endl;
+            cout<<" >> GENERO: "<<genero<<endl;
+            cout<<" >> FAIXA ETARIA: "<<faixa_etaria<<endl;
+            cout<<" -------------------------------------"<<endl;
+        }
+};
+
+
+int main() //FALTA FAZER: MENU------RECEBIMENTO DE DINHEIRO DO AUTOR----- ------ -----
+{
+    Filme *x[2];   //NUMERO DE FILMES
+    Usuario *y[2]; //NUMERO DE USUARIOS
+    //x[0]=new Filme; //DECLARAÇÃO DE NOVO FILME
+    y[0]=new Usuario; //DECLARAÇÃO DE NOVO USUARIO
+    y[1]=new Usuario; //DECLARAÇÃO DE NOVO USUARIO
+    //x[0]->Cadastra_Autor();//FUNÇÃO PRONTA DE CADASTRO DE NOME E CPF DO AUTOR
+    //system("CLS"); //LIMPA TELA RETIRAR DO COMENTARIO PARA IMPLEMENTA-LA
+    //x[0]->Cadastra_Filme(); //FUNÇÃO PRONTA DE CADASTRO DO NOME, FAIXA ETARIA E GENERO DO FILME
+    //system("CLS"); //LIMPA TELA RETIRAR DO COMENTARIO PARA IMPLEMENTA-LA
+    y[0]->Cadastra_Usuario(); //FUNÇÃO PRONTA DE CADASTRO DO NOME, CPF E IDADE DO USUARIO
+    y[0]->Imprime_Usuario(); //FUNÇÃO PRONTA DE IMPRIMIR USUARIO (NOME,IDADE,CPF)
+    y[1]->Cadastra_Usuario();
+    y[1]->Imprime_Usuario();
+
+    //system("CLS"); //LIMPA TELA RETIRAR DO COMENTARIO PARA IMPLEMENTA-LA
+    //x[0]->Imprime_Filme(); //FUNÇÃO PRONTA DE IMPRIMIR FILME (NOME,GENERO,FAIXA ETARIA)
+    //x[0]->Imprime_Autor(); //FUNÇÃO PRONTA DE IMPRIMIR AUTOR (NOME,CPF)
+    //y[0]->Imprime_Usuario(); //FUNÇÃO PRONTA DE IMPRIMIR USUARIO (NOME,IDADE,CPF)
+    cout<<"\n----------FIM DO PROGRAMA----------";
+    return 0;
+}
