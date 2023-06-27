@@ -1,0 +1,578 @@
+#include <iostream>
+#include <string.h>
+#include <cstdlib>
+#include <limits>
+
+
+using namespace std;
+
+
+class Usuario{
+public:
+    int minutos_assistidos;
+    private:
+    char nome_usuario[50];
+    char CPF_Usuario[11];
+    int n_user=0;
+    int idade_usuario;
+
+    public:
+        void Teste_CPF(char cpf_teste[50],char CPF_Escrito[50]){
+            while(strcmp(CPF_Escrito,cpf_teste)==0){
+                cout<<"\n CPF ja cadastrado!!!"<<endl;
+                cout<<"\n > Digite o CPF: ";
+                fflush(stdin);
+                gets(CPF_Escrito);
+            }
+        }
+        void Cadastra_Usuario(){
+
+            char Nome_Usuario_Dig[50];
+            char CPF_Usuario_Dig[50],cpf_ant[50];
+            int Idade_Usuario_Dig,t_user,r_user=0,n_usuario=1;
+            setlocale(LC_ALL,"portuguese");
+            n_usuario=n_usuario+1;
+            cout<<"\n > Digite o nome de usuario: ";
+            fflush(stdin);
+            gets(Nome_Usuario_Dig);
+            strcpy(nome_usuario,Nome_Usuario_Dig);
+
+            cout<<"\n > Digite a idade do usuario: ";
+            cin>>Idade_Usuario_Dig;
+            idade_usuario=Idade_Usuario_Dig;
+
+            cout<<"\n > Digite o CPF do usuario: ";
+            fflush(stdin);
+            gets(CPF_Usuario_Dig);                  //Pega o CPF do usuario
+            cout<<"CPF_Usuario(PRIVADO): "<<CPF_Usuario;
+            cout<<"CPF_Usuario(PUBLICO): "<<CPF_Usuario_Dig;
+
+            Teste_CPF(CPF_Usuario_Dig,CPF_Usuario);//Testa CPF se é igual a algum já registrado
+
+            t_user=strlen(CPF_Usuario_Dig);
+            for(int i=0;i<t_user;i++){               //Testa o CPF do usuario
+                while((CPF_Usuario_Dig[i]!='0')&&(CPF_Usuario_Dig[i]!='1')&&(CPF_Usuario_Dig[i]!='2')&&(CPF_Usuario_Dig[i]!='3')&&(CPF_Usuario_Dig[i]!='4')&&(CPF_Usuario_Dig[i]!='5')&&(CPF_Usuario_Dig[i]!='6')&&(CPF_Usuario_Dig[i]!='7')&&(CPF_Usuario_Dig[i]!='8')&&(CPF_Usuario_Dig[i]!='9')&&(CPF_Usuario_Dig[i]!='-')&&(CPF_Usuario_Dig[i]!='.')&&(CPF_Usuario_Dig[i]!=' ')){
+                    cout<<"\n CPF Escrito de forma incorreta escreva novamente: ";
+                    fflush(stdin);              //Testa se tem letra no cpf e pede correção
+                    gets(CPF_Usuario_Dig);
+                }
+            }
+            for(int j=0;j<t_user;j++){              //Copia apenas os numeros do cpf digitado para a variavel privada
+                if((CPF_Usuario_Dig[j]!='.')&&(CPF_Usuario_Dig[j]!='-')&&(CPF_Usuario_Dig[j]!=' ')){
+                    CPF_Usuario[r_user]=CPF_Usuario_Dig[j];
+                    r_user=r_user+1;
+                }
+                else{
+                    CPF_Usuario[r_user]=CPF_Usuario_Dig[j+1];
+
+                }
+            }
+            n_user=n_user+n_usuario;
+        }
+        void Imprime_Usuario(){
+
+            setlocale(LC_ALL,"portuguese");
+            cout<<" >> USUARIO: "<<nome_usuario<<endl;
+            cout<<" >> CPF: "<<CPF_Usuario<<endl;
+            cout<<" >> IDADE: "<<idade_usuario<<endl;
+            //cout<<" >> NUMERO DE USUARIOS: "<<n_user<<endl;
+        }
+
+        void Cadastra_Usuario_Auto(char nome_usuario_auto[50],int idade_auto,char CPF_usuario_auto[11], int minutos_assistidos_auto){
+            strcpy(nome_usuario, nome_usuario_auto);
+            idade_usuario=idade_auto;
+            strcpy(CPF_Usuario, CPF_usuario_auto);
+            minutos_assistidos=minutos_assistidos_auto;
+        }
+        char* getNomeUsuario(){
+         return nome_usuario;
+        }
+};
+
+class Autor{
+    public:
+    char nome_autor[50];
+    private:
+    char CPF_autor[11];
+    float receita;
+    public:
+        void Cadastra_Autor(){
+            int t_autor=0,r=0;
+            char CPF_Autor_dig[15];
+            char  nome_autor_digitado[50];
+            setlocale(LC_ALL,"portuguese");
+
+            cout<<"\n > Digite o nome do autor do filme: "; //Cadastra o nome do autor
+            fflush(stdin);
+            gets(nome_autor_digitado);
+            strcpy(nome_autor,nome_autor_digitado);
+
+            cout<<"\n > Digite o CPF do autor do filme(Digite os 11 números): ";
+            fflush(stdin);
+            gets(CPF_Autor_dig);                //Pega o CPF do autor
+            t_autor=strlen(CPF_Autor_dig);
+            for(int i=0;i<t_autor;i++){               //Testa o CPF do autor
+                while((CPF_Autor_dig[i]!='0')&&(CPF_Autor_dig[i]!='1')&&(CPF_Autor_dig[i]!='2')&&(CPF_Autor_dig[i]!='3')&&(CPF_Autor_dig[i]!='4')&&(CPF_Autor_dig[i]!='5')&&(CPF_Autor_dig[i]!='6')&&(CPF_Autor_dig[i]!='7')&&(CPF_Autor_dig[i]!='8')&&(CPF_Autor_dig[i]!='9')&&(CPF_Autor_dig[i]!='-')&&(CPF_Autor_dig[i]!='.')&&(CPF_Autor_dig[i]!=' ')){
+                    cout<<"\n CPF Escrito de forma incorreta escreva novamente (lembre-se de digitar os 11 números): ";
+                    fflush(stdin);              //Testa se tem letra no cpf e pede correção
+                    gets(CPF_Autor_dig);
+                }
+            }
+            for(int j=0;j<15;j++){              //Copia apenas os numeros do cpf digitado para a variavel privada
+                if((CPF_Autor_dig[j]!='.')&&(CPF_Autor_dig[j]!='-')&&(CPF_Autor_dig[j]!=' ')){
+                    CPF_autor[r]=CPF_Autor_dig[j];
+                    r=r+1;
+                }
+                else{
+                    CPF_autor[r]=CPF_Autor_dig[j+1];
+                }
+            }
+        }
+        void Imprime_Autor(){
+            int t_autor_final=0;
+            setlocale(LC_ALL,"portuguese");
+            cout<<" >> AUTOR: "<<nome_autor<<endl;
+            cout<<" >> CPF: ";
+            t_autor_final=strlen(CPF_autor);
+            for(int i=0;i<t_autor_final;i++){
+                    cout<<""<<CPF_autor[i];
+
+            }
+            cout<<"\n -------------------------------------"<<endl;
+        }
+        void Cadastra_Autor_Auto(char _nome_autor_auto[50],char _CPF_autor_auto[11], float _receita_auto){
+            strcpy(this->nome_autor, _nome_autor_auto);
+            strcpy(this->CPF_autor, _CPF_autor_auto);
+            this->receita = _receita_auto;
+        }
+
+        void Calcula_Receita(){
+
+        }
+};
+
+class Filme : public Autor{
+public:
+    Autor* autor;
+    int views;
+    private:
+    char nome_filme[100],genero[50];
+    int faixa_etaria, duracao_filme;
+    float preco_por_view;
+
+    public:
+        void Cadastra_Filme(){
+            char nome_filme_digitado[50];
+            int faixa_etaria_digitada, duracao_filme_digitado;
+            float preco_por_view_digitado;
+            char genero_digitado[50];
+
+            setlocale(LC_ALL,"portuguese");
+
+                cout<<"\n > Digite o nome do filme que deseja cadastrar: ";
+                    fflush(stdin);
+                    gets(nome_filme_digitado);
+                    strcpy(nome_filme,nome_filme_digitado);
+
+                cout<<"\n > Digite o genero do filme: ";
+                    fflush(stdin);
+                    gets(genero_digitado);
+                    strcpy(genero,genero_digitado);
+
+                cout<<"\n > Digite a faixa etaria do filme(livre = 0 / 10 / 12 / 14 / 16 / 18): ";
+                fflush(stdin);
+                cin >> faixa_etaria_digitada;
+                while((faixa_etaria_digitada!=0)&&(faixa_etaria_digitada!=10)&&(faixa_etaria_digitada!=12)&&(faixa_etaria_digitada!=14)&&(faixa_etaria_digitada!=16)&&(faixa_etaria_digitada!=18)){
+                    cout<<"\n > Classificação indicativa inválida tente novamente: ";
+                    fflush(stdin);
+                    cin>>faixa_etaria_digitada;
+                }
+                faixa_etaria=faixa_etaria_digitada;
+
+                cout<<"\n > Digite a duração do filme em minutos: ";
+                fflush(stdin);
+                cin >> duracao_filme_digitado;
+                duracao_filme=duracao_filme_digitado;
+
+
+                cout<<"\n > Digite o preço que esse filme paga por vizualização ao autor: ";
+                fflush(stdin);
+                cin >> preco_por_view_digitado;
+                preco_por_view=preco_por_view_digitado;
+
+        }
+        void Imprime_Filme(){
+            setlocale(LC_ALL,"portuguese");
+            cout<<" >> FILME: "<<nome_filme<<endl;
+            cout<<" >> GENERO: "<<genero<<endl;
+            cout<<" >> FAIXA ETARIA: "<<faixa_etaria<<endl;
+            cout<<" -------------------------------------"<<endl;
+        }
+
+        void Associa_Autor_Auto(Autor* _z){
+            this->autor=_z;
+            this->autor->Imprime_Autor();
+        }
+
+        void Cadastra_Filme_Auto(char nome_filme_auto[50],char genero_auto[50],int faixa_etaria_auto, float preco_por_view_auto, int views_auto, int p,int duracao_filme_auto){
+            strcpy(nome_filme, nome_filme_auto);
+            strcpy(genero, genero_auto);
+            faixa_etaria=faixa_etaria_auto;
+            preco_por_view=preco_por_view_auto;
+            views=views_auto;
+            duracao_filme=duracao_filme_auto;
+
+            Imprime_Filme();
+        }
+        char* getNomeFilme(){
+         return nome_filme;
+        }
+};
+
+/*
+int main() //FALTA FAZER: MENU------RECEBIMENTO DE DINHEIRO DO AUTOR----- ------ -----
+{
+    Filme *x[2];   //NUMERO DE FILMES
+    Usuario *y[2]; //NUMERO DE USUARIOS
+    //x[0]=new Filme; //DECLARAÇÃO DE NOVO FILME
+    y[0]=new Usuario; //DECLARAÇÃO DE NOVO USUARIO
+    y[1]=new Usuario; //DECLARAÇÃO DE NOVO USUARIO
+    //x[0]->Cadastra_Autor();//FUNÇÃO PRONTA DE CADASTRO DE NOME E CPF DO AUTOR
+    //system("CLS"); //LIMPA TELA RETIRAR DO COMENTARIO PARA IMPLEMENTA-LA
+    //x[0]->Cadastra_Filme(); //FUNÇÃO PRONTA DE CADASTRO DO NOME, FAIXA ETARIA E GENERO DO FILME
+    //system("CLS"); //LIMPA TELA RETIRAR DO COMENTARIO PARA IMPLEMENTA-LA
+    y[0]->Cadastra_Usuario(); //FUNÇÃO PRONTA DE CADASTRO DO NOME, CPF E IDADE DO USUARIO
+    y[0]->Imprime_Usuario(); //FUNÇÃO PRONTA DE IMPRIMIR USUARIO (NOME,IDADE,CPF)
+    y[1]->Cadastra_Usuario();
+    y[1]->Imprime_Usuario();
+
+    //system("CLS"); //LIMPA TELA RETIRAR DO COMENTARIO PARA IMPLEMENTA-LA
+    //x[0]->Imprime_Filme(); //FUNÇÃO PRONTA DE IMPRIMIR FILME (NOME,GENERO,FAIXA ETARIA)
+    //x[0]->Imprime_Autor(); //FUNÇÃO PRONTA DE IMPRIMIR AUTOR (NOME,CPF)
+    //y[0]->Imprime_Usuario(); //FUNÇÃO PRONTA DE IMPRIMIR USUARIO (NOME,IDADE,CPF)
+    cout<<"\n----------FIM DO PROGRAMA----------";
+    return 0;
+}
+*/
+
+
+
+int main(){
+    setlocale(LC_ALL,"Portuguese");
+
+    int numero_de_usuarios=0,numero_de_filmes=0,numero_de_autores=0;
+    int opcao=0, posicao_usuario=0,posicao_filme=0,posicao_autor=0, escolha=0,i=0, maior=0, posicao=0, temp=0, tempf=0, contautomatico=0;
+
+    Filme *x[100];   //NUMERO DE FILMES
+    Usuario *y[11];   //NUMERO DE USUARIOS
+    Autor *z[100];   //NUMERO DE AUTORES
+
+jumpstart:
+
+    cout << "Bem vindo! Insira uma das opções" << endl;
+    cout << "(1)Cadastro\n(2)Listas\n(3)Pesquisar\n(4)Dados Automáticos\n(5)Assistir\n(6)Sair" << endl;
+    cout << "\nOpção: ";
+    cin >> opcao;
+
+    switch(opcao){
+    case 1:  //OPÇÃO PARA CADASTROS
+        escolha=0;
+jumpescolha1:
+        cout << "\nO que deseja cadastrar?" << endl << "(1)Usuário\n(2)Autor\n(3)Filme\n\nOpção:";
+        cin >> escolha;
+        cout << "\n\n";
+
+        if(escolha==1){
+            y[posicao_usuario]=new Usuario; //DECLARAÇÃO DE NOVO USUARIO
+            y[posicao_usuario]->Cadastra_Usuario();
+            posicao_usuario++;
+            cout << "\n\nUsuário cadastrado com sucesso!\n";
+            system("pause");
+            system("CLS");
+            goto jumpstart;
+        }
+        if(escolha==2){
+            z[posicao_autor]=new Autor; //DECLARAÇÃO DE NOVO AUTOR
+            z[posicao_autor]->Cadastra_Autor();
+            posicao_autor++;
+            cout << "\n\nAutor cadastrado com sucesso!\n";
+            system("pause");
+            system("CLS");
+            goto jumpstart;
+        }
+        if(escolha==3){
+            x[posicao_filme]=new Filme; //DECLARAÇÃO DE NOVO FILME   !!!FALTA ASSOCIAR FILME A UM AUTOR!!!
+            x[posicao_filme]->Cadastra_Filme();
+            posicao_filme++;
+            cout << "\n\nFilme cadastrado com sucesso!\n";
+            system("pause");
+            system("CLS");
+            goto jumpstart;
+        }
+        if((escolha<1)||(escolha>3)){
+            cout << "Erro!\n";
+            system("pause");
+            system("CLS");
+            goto jumpescolha1;
+        }
+    break;
+
+
+    case 2:  //OPÇÃO PARA LISTAS
+        escolha=0;
+jumpescolha2:
+        cout << "Qual lista você deseja ver?" << endl << "(1)Usuários\n(2)Autores\n(3)Filmes\n\nOpção: ";
+        cin >> escolha;
+        cout << "\n\n";
+
+        if(escolha==1){
+            system("CLS");
+            int a[posicao_usuario];
+            char b[50];
+            string c[posicao_usuario], tp;
+            for(int i=0;i<posicao_usuario;i++){
+                a[i]=y[i]->minutos_assistidos;
+                strcpy(b, y[i]->getNomeUsuario());
+                c[i]=b;
+            }
+
+            for(int i = 0; i<posicao_usuario; i++) {
+                for(int j = i+1; j<posicao_usuario; j++){
+                        if(a[j] < a[i]) {
+                        temp = a[i];
+                        a[i] = a[j];
+                        a[j] = temp;
+                        tp = c[i];
+                        c[i] = c[j];
+                        c[j] = tp;
+                    }
+                }
+            }
+            cout << "Lista de usuários\n\n";
+            for(int i=0;i<posicao_usuario;i++){
+                cout << i+1 << "º usuário // Nome: "<<c[i]<<" // Minutos assistidos: " << a[i] << endl;
+            }
+            cout << endl;
+            system("pause");
+            system("CLS");
+        }
+        if(escolha==2){
+            system("CLS");
+            cout << "Lista de Autores\n\n";
+            for(int i=0;i<posicao_autor;i++){
+                cout << i+1 << "º Autor. Nome: " << z[i]->nome_autor << endl;
+            }
+            cout << endl;
+
+            system("pause");
+            system("CLS");
+        }
+        if(escolha==3){
+            system("CLS");
+            int a[posicao_filme];
+            char b[50];
+            string c[posicao_filme],tp;
+                for(int i=0;i<posicao_filme;i++){
+                    a[i]=x[i]->views;
+                    strcpy(b, x[i]->getNomeFilme());
+                    c[i]=b;
+                }
+
+                for(int i=0;i<posicao_filme;i++){
+                    for(int j=i+1; j<posicao_filme;j++){
+                        if(a[j]>a[i]){
+                            temp=a[i];
+                            a[i]=a[j];
+                            a[j]=temp;
+                            tp = c[i];
+                            c[i] = c[j];
+                            c[j] = tp;
+                        }
+                    }
+                }
+            cout << "Lista de filmes\n\n";
+            for(int i=0;i<posicao_filme;i++){
+                cout << i+1 << "º Filme // Nome Filme: "<< c[i] <<" // Views: " << a[i] << endl;
+            }
+            cout << endl;
+            system("pause");
+            system("CLS");
+        }
+        if((escolha<1)||(escolha>3)){
+            cout << "Erro!\n";
+            system("pause");
+            system("CLS");
+            goto jumpescolha1;
+        }
+    break;
+
+
+    case 3:  //OPÇÃO DE PESQUISAR
+
+        /*
+
+        INSERIR MÉTODO
+
+        */
+
+
+    break;
+
+
+
+
+
+    case 4:  //DECLARAÇÃO AUTOMÁTICA DE DADOS
+        if(contautomatico==0){
+        cout << "\n\nINJETANDO DADOS...";
+
+        y[posicao_usuario]=new Usuario; //DECLARAÇÃO DE NOVO USUARIO
+        y[posicao_usuario]->Cadastra_Usuario_Auto("Pablo",15,"45447775000", 353);
+        posicao_usuario++;
+        y[posicao_usuario]=new Usuario; //DECLARAÇÃO DE NOVO USUARIO
+        y[posicao_usuario]->Cadastra_Usuario_Auto("Jurandir",15,"78238678005", 351);
+        posicao_usuario++;
+        y[posicao_usuario]=new Usuario; //DECLARAÇÃO DE NOVO USUARIO
+        y[posicao_usuario]->Cadastra_Usuario_Auto("Edilêne",72,"86467344049", 214);
+        posicao_usuario++;
+        y[posicao_usuario]=new Usuario; //DECLARAÇÃO DE NOVO USUARIO
+        y[posicao_usuario]->Cadastra_Usuario_Auto("Enzo",5,"51924583070", 618);
+        posicao_usuario++;
+        y[posicao_usuario]=new Usuario; //DECLARAÇÃO DE NOVO USUARIO
+        y[posicao_usuario]->Cadastra_Usuario_Auto("Luiz",25,"28894175065", 351);
+        posicao_usuario++;
+
+
+        //DECLARANDO AUTOR E SEU FILME
+        z[posicao_autor]=new Autor; //DECLARAÇÃO DE NOVO AUTOR
+        x[posicao_filme]=new Filme;
+        z[posicao_autor]->Cadastra_Autor_Auto("Dave Webb","00000000000", 592.2);
+        x[posicao_filme]->Cadastra_Filme_Auto("Trust Her","Romance",12, 0.4, 846, posicao_autor, 89);
+        x[posicao_filme]->Associa_Autor_Auto(z[posicao_autor]);
+        posicao_autor++;
+        posicao_filme++;
+
+        //DECLARANDO AUTOR E SEU FILME
+        z[posicao_autor]=new Autor; //DECLARAÇÃO DE NOVO AUTOR
+        z[posicao_autor]->Cadastra_Autor_Auto("Edgar Murray","00000000001", 8680.5);
+        x[posicao_filme]=new Filme;
+        x[posicao_filme]->Cadastra_Filme_Auto("Dinos And Chickens","Infantil",0, 0.9, 9645, posicao_autor, 103);
+        x[posicao_filme]->Associa_Autor_Auto(z[posicao_autor]);
+        posicao_autor++;
+        posicao_filme++;
+
+        //DECLARANDO AUTOR E SEU FILME
+        z[posicao_autor]=new Autor; //DECLARAÇÃO DE NOVO AUTOR
+        z[posicao_autor]->Cadastra_Autor_Auto("Alexander Philo Ortiz","00000000002", 1057.8);
+        x[posicao_filme]=new Filme;
+        x[posicao_filme]->Cadastra_Filme_Auto("Thief Program","Comédia",10, 0.6, 1763, posicao_autor, 125);
+        x[posicao_filme]->Associa_Autor_Auto(z[posicao_autor]);
+        posicao_autor++;
+        posicao_filme++;
+
+        //DECLARANDO AUTOR E SEU FILME
+        z[posicao_autor]=new Autor; //DECLARAÇÃO DE NOVO AUTOR
+        z[posicao_autor]->Cadastra_Autor_Auto("Julia Glenn","00000000003", 2072.7);
+        x[posicao_filme]=new Filme;
+        x[posicao_filme]->Cadastra_Filme_Auto("Men Behind The Door","Horror",18, 0.7, 2961, posicao_autor, 127);
+        x[posicao_filme]->Associa_Autor_Auto(z[posicao_autor]);
+        posicao_autor++;
+        posicao_filme++;
+
+        //DECLARANDO AUTOR E SEU FILME
+        z[posicao_autor]=new Autor;
+        z[posicao_autor]->Cadastra_Autor_Auto("Jamison Solomon Osian","00000000004", 873.0);
+        x[posicao_filme]=new Filme;
+        x[posicao_filme]->Cadastra_Filme_Auto("Monuments Of The Fallen","Sci-Fi",16, 0.6, 1455, posicao_autor, 99);
+        x[posicao_filme]->Associa_Autor_Auto(z[posicao_autor]);
+        posicao_autor++;
+        posicao_filme++;
+
+
+        cout << "\n\nDADOS INJETADOS COM SUCESSO\n";
+        }
+        if(contautomatico!=0){
+            cout<<"\n\nOS DADOS JA FORAM INJETADOS ANTERIORMENTE!\n";
+        }
+        contautomatico++;
+        system("pause");
+        system("CLS");
+        goto jumpstart;
+    break;
+
+
+    case 5:  //PROCURAR FILMES
+        escolha=0;
+jumpescolha5:
+        cout << "Procure pelo quer assistir. Pesquise por\n(1)Título\n(2)Gênero\n(3)Autor\n\nOpção: ";
+        cin >> escolha;
+        cout << "\n\n";
+
+        if(escolha==1){
+
+            /*
+
+            INSERIR MÉTODO
+
+            */
+
+            cout << "\n\nVizualização registrada com sucesso!\n";
+            system("pause");
+            system("CLS");
+        }
+        if(escolha==2){
+
+            /*
+
+            INSERIR MÉTODO
+
+            */
+
+            cout << "\n\nVizualização registrada com sucesso!\n";
+            system("pause");
+            system("CLS");
+        }
+        if(escolha==3){
+
+            /*
+
+            INSERIR MÉTODO
+
+            */
+
+            cout << "\n\nVizualização registrada com sucesso!\n";
+            system("pause");
+            system("CLS");
+        }
+        if((escolha<1)||(escolha>3)){
+            cout << "Erro!";
+            system("pause");
+            system("CLS");
+            goto jumpescolha5;
+        }
+    break;
+
+
+    case 6:  //OPÇÃO PARA TERMINAR O PROGRAMA
+        cout << "\n\nFIM\n\n" << endl;
+        return 0;
+    break;
+
+
+    default:  //ERRO NAS OPÇÕES
+        cout << "\nErro!\n";
+        std::cin.clear();
+        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+        system("pause");
+        system("CLS");
+        goto jumpstart;
+    break;
+    }
+
+    //LOOP PARA VOLTAR AO MENU
+    system("pause");
+    system("CLS");
+    goto jumpstart;
+
+    return 0;
+}
