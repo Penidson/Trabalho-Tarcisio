@@ -1,0 +1,61 @@
+#include <iostream>
+#include <windows.h>
+
+using namespace std;
+
+#define abertura 300
+
+void intro(){
+        system("color 4");
+cout<<" M)mm mmm                    t)           ##                         F)ffffff l)L  ##"<<endl;
+Sleep(abertura);
+cout<<"M)  mm  mm                 t)tTTT                                    F)        l)"<<endl;
+Sleep(abertura);
+cout<<"M)  mm  mm a)AAAA  n)NNNN    t)   e)EEEEE i)  g)GGG  a)AAAA          F)fffff   l)  i) x)   XX"<<endl;
+Sleep(abertura);
+cout<<"M)  mm  mm  a)AAA  n)   NN   t)   e)EEEE  i) g)   GG  a)AAA  ####### F)        l)  i)   x)X"<<endl;
+Sleep(abertura);
+cout<<"M)      mm a)   A  n)   NN   t)   e)      i) g)   GG a)   A          F)        l)  i)   x)X"<<endl;
+Sleep(abertura);
+cout<<"M)      mm  a)AAAA n)   NN   t)T   e)EEEE i)  g)GGGG  a)AAAA         F)       l)LL i) x)   XX"<<endl;
+Sleep(abertura);
+cout<<"                                                  GG"<<endl;
+Sleep(abertura);
+cout<<"                                             g)GGGG "<<endl;
+Sleep(2000);
+system("cls");
+
+for(int c=0;c<8;c++){
+    if(c<8){
+       cout<<" M)mm mmm                    t)           ##                         F)ffffff l)L  ##"<<endl;
+    }
+    if(c<7){
+       cout<<"M)  mm  mm                 t)tTTT                                    F)        l)"<<endl;
+    }
+    if(c<6){
+       cout<<"M)  mm  mm a)AAAA  n)NNNN    t)   e)EEEEE i)  g)GGG  a)AAAA          F)fffff   l)  i) x)   XX"<<endl;
+    }
+    if(c<5){
+       cout<<"M)  mm  mm  a)AAA  n)   NN   t)   e)EEEE  i) g)   GG  a)AAA  ####### F)        l)  i)   x)X"<<endl;
+    }
+    if(c<4){
+       cout<<"M)      mm a)   A  n)   NN   t)   e)      i) g)   GG a)   A          F)        l)  i)   x)X"<<endl;
+    }
+    if(c<3){
+       cout<<"M)      mm  a)AAAA n)   NN   t)T   e)EEEE i)  g)GGGG  a)AAAA         F)       l)LL i) x)   XX"<<endl;
+    }
+    if(c<2){
+       cout<<"                                                  GG"<<endl;
+    }
+    if(c<1){
+       cout<<"                                             g)GGGG "<<endl;
+    }
+    Sleep(abertura);
+    system("cls");
+}
+}
+
+int main() {
+    intro();
+    return 0;
+}
